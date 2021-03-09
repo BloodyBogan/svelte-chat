@@ -7,13 +7,16 @@
     "precommit:frontend": "cd frontend && npm run validate && npm run lint:fix",
     "precommit:backend": "cd backend && npm run lint:fix",
     "precommit": "npm-run-all precommit:*",
+    "frontend:install": "cd frontend && npm install --force",
     "frontend:build": "cd frontend && npm run build",
     "frontend:start": "cd frontend && npm run start",
     "frontend:dev": "cd frontend && npm run dev",
     "frontend:lint": "cd frontend && npm run lint",
+    "backend:install": "cd backend && npm install",
     "backend:start": "cd backend && npm run start",
     "backend:dev": "cd backend && npm run dev",
     "backend:lint": "cd backend && npm run lint",
+    "install": "npm install && npm run frontend:install && npm run backend:install",
     "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm run dev\""
   },
   "keywords": [

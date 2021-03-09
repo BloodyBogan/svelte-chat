@@ -12,6 +12,12 @@ module.exports = {
       project: ['./tsconfig.json'],
       extraFileExtensions: ['.svelte']
     },
+    "rules": {
+      "no-undef": "off",
+      "@typescript-eslint/no-unsafe-call": "off",
+      "@typescript-eslint/no-unsafe-member-access": "off",
+      "@typescript-eslint/unbound-method": "off"
+    },
     env: {
       es6: true,
       browser: true
