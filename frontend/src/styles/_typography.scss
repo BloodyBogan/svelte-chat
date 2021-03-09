@@ -1,0 +1,9 @@
+a {
+    text-decoration: none;
+    color: $clr-accent-darkest;
+    
+    &:focus {
+        outline: 0.125em solid $clr-accent-darkest;
+        outline-offset: 0.125em;
+    }
+}

@@ -1,0 +1,61 @@
+*,
+*::before,
+*::after {
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+}
+
+:root {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  font-family: 'Mulish', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 62.5%;
+  line-height: 1.25;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-size: 1.6em;
+  text-align: center;
+  color: $clr-dark-100;
+  background: $clr-body-gradient-right;
+  background: linear-gradient(45deg, $clr-body-gradient-left, $clr-body-gradient-right);
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+  width: 100%;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+input,
+button {
+  display: inline-block;
+  padding: 0;
+  font: inherit;
+  color: currentColor;
+  background: none;
+  appearance: none;
+  border: none;
+  outline: none;
+}
+
+input[type="submit"],
+button {
+  cursor: pointer;
+}

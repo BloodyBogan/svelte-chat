@@ -1,6 +1,8 @@
 <script lang="ts">
   import { Router, Route, redirect } from './router';
 
+  import Header from './components/Header.svelte';
+
   import Home from './pages/Home.svelte';
   import SignUp from './pages/SignUp.svelte';
   import LogIn from './pages/LogIn.svelte';
@@ -18,16 +20,7 @@
   };
 </script>
 
-<header>
-  <nav>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/chat">Chat</a></li>
-      <li><a href="/login">Log In</a></li>
-      <li><a href="/signup">Sign Up</a></li>
-    </ul>
-  </nav>
-</header>
+<Header />
 <main>
   <Router>
     <Route path="/" component={Home} />
