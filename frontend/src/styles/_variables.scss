@@ -10,9 +10,11 @@ $clr-accent-light: #BA91E9;
 $clr-body-gradient-left: #F3F2FD;
 $clr-body-gradient-right: #F9F4FC;
 
+$border-radius-small: 0.3125em;
 $border-radius-medium: 0.625em;
 
 $box-shadow-main: 0rem 1.5rem 4rem -2rem rgba(0, 64, 102, 40%);
+$box-shadow-buttons: 0rem 1.25rem 1.25rem -0.9375rem rgba(89, 77, 223, 50%);
 
 $transition-duration-medium: 300ms;
 $transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);

@@ -1,9 +1,19 @@
+h1, p {
+    margin: 0;
+}
+
+h1 {
+    font-size: 4.4rem;
+    font-weight: 700;
+    color: $clr-dark-900;
+}
+
 a {
     text-decoration: none;
     color: $clr-accent-darkest;
     
     &:focus {
-        outline: 0.125em solid $clr-accent-darkest;
+        outline: 0.125em solid currentColor;
         outline-offset: 0.125em;
     }
 }

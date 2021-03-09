@@ -21,7 +21,7 @@
 </script>
 
 <Header />
-<main>
+<main role="main">
   <Router>
     <Route path="/" component={Home} />
     <Route path="/signup" component={SignUp} />
@@ -30,3 +30,20 @@
     <Route component={NotFound} />
   </Router>
 </main>
+
+<style lang="scss">
+  @import './styles/variables';
+
+  main {
+    display: inline-flex;
+    flex-direction: column;
+    max-width: $max-width;
+    width: 100%;
+    min-height: 64rem;
+    margin: 3.2rem auto 6.4rem auto;
+    padding: 2.5em;
+    background-color: $clr-light-100;
+    border-radius: $border-radius-medium;
+    box-shadow: $box-shadow-main;
+  }
+</style>

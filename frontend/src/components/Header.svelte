@@ -37,7 +37,7 @@
     display: inline-block;
     max-width: $max-width;
     width: 100%;
-    margin: 6.4rem 0rem 3.2rem;
+    margin: 6.4rem 0rem 0rem;
     padding: 2.5em;
     background-color: $clr-light-100;
     border-radius: $border-radius-medium;

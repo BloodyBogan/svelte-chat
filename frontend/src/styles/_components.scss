@@ -1,0 +1,23 @@
+.btn {
+    display: inline-block;
+    padding: 1.25em 4.875em;
+    text-align: center;
+    color: $clr-light-100;
+    background-color: $clr-accent-darkest;
+    border-radius: $border-radius-small;
+    box-shadow: $box-shadow-buttons;
+    transform: scale(1);
+    transition-property: transform;
+    transition-duration: $transition-duration-medium;
+    transition-timing-function: $transition-timing-function;
+    
+    &:hover, &:focus {
+        transform: scale(1.02);
+        outline: none;
+    }
+
+    &:active {
+        transform: scale(0.98);
+        transition: none;
+    }
+}
