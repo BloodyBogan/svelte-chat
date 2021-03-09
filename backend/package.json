@@ -5,10 +5,25 @@
     "start": "cross-env NODE_ENV=production node server.js",
     "dev": "cross-env NODE_ENV=development nodemon server.js",
     "lint": "eslint . --ext .js",
-    "lint:fix": "eslint . --ext .js --fix"
+    "lint:fix": "eslint . --ext .js --fix",
+    "generateKeys": "node utils/generateKeys.js"
   },
   "dependencies": {
-    "cross-env": "^7.0.3"
+    "bcrypt": "^5.0.1",
+    "colors": "^1.4.0",
+    "connect-mongo": "^3.2.0",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "helmet": "^4.4.1",
+    "mongoose": "^5.11.19",
+    "mongoose-type-url": "^2.1.0",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "seedable-random-avatar-generator": "^1.1.2",
+    "volleyball": "^1.5.1"
   },
   "devDependencies": {
     "eslint": "^7.21.0",
