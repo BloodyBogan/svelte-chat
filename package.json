@@ -16,6 +16,7 @@
     "backend:start": "cd backend && npm run start",
     "backend:dev": "cd backend && npm run dev",
     "backend:lint": "cd backend && npm run lint",
+    "backend:generateKeys": "cd backend && npm run generateKeys",
     "install": "npm install && npm run frontend:install && npm run backend:install",
     "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm run dev\""
   },

@@ -11,14 +11,22 @@
     transition-duration: $transition-duration-medium;
     transition-timing-function: $transition-timing-function;
     
-    &:hover, &:focus {
+    &:hover:not(:disabled), &:focus:not(:disabled) {
         transform: scale(1.02);
         outline: none;
     }
 
-    &:active {
+    &:active:not(:disabled) {
         transform: scale(0.98);
         transition: none;
+    }
+
+    &:disabled {
+        color: $clr-dark-100;
+        background-color: $clr-light-200;
+        border-color: $clr-light-200;
+        box-shadow: none;
+        cursor: not-allowed;
     }
 }
 
@@ -35,6 +43,13 @@
         color: $clr-dark-900;
         border: 0.1rem solid $clr-light-200;
         border-radius: $border-radius-small;
+    }
+    
+    .error {
+        margin-top: 0.8rem;
+        font-size: 1.4rem;
+        text-align: left;
+        color: $clr-red;
     }
 
     & + & {
