@@ -21,3 +21,29 @@
         transition: none;
     }
 }
+
+.form__group {
+    label {
+        display: block;
+        text-align: left;
+        margin-bottom: 1rem;
+    }
+
+    input[type="text"], input[type="password"] {
+        width: 100%;
+        padding: 1.25em;
+        color: $clr-dark-900;
+        border: 0.1rem solid $clr-light-200;
+        border-radius: $border-radius-small;
+    }
+
+    & + & {
+        margin-top: 3.5rem;
+    }
+
+    & + input[type="submit"] {
+        margin-top: 4rem;
+        display: block;
+        width: 100%;
+    }
+}

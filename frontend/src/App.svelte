@@ -1,6 +1,9 @@
 <script lang="ts">
   import { Router, Route, redirect } from './router';
 
+  import { activeRouteStore } from './router/types';
+  const { activeRoute } = activeRouteStore;
+
   import Header from './components/Header.svelte';
 
   import Home from './pages/Home.svelte';
@@ -21,7 +24,7 @@
 </script>
 
 <Header />
-<main role="main">
+<main role="main" class:vertical={$activeRoute.path === '/'}>
   <Router>
     <Route path="/" component={Home} />
     <Route path="/signup" component={SignUp} />
@@ -36,7 +39,8 @@
 
   main {
     display: inline-flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
     max-width: $max-width;
     width: 100%;
     min-height: 64rem;
@@ -45,5 +49,10 @@
     background-color: $clr-light-100;
     border-radius: $border-radius-medium;
     box-shadow: $box-shadow-main;
+
+    &.vertical {
+      flex-direction: column;
+      align-items: unset;
+    }
   }
 </style>
