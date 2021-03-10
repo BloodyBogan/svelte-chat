@@ -5,6 +5,7 @@
   const { activeRoute } = activeRouteStore;
 
   import Header from './components/Header.svelte';
+  import Toasts from './components/Toasts.svelte';
 
   import Home from './pages/Home.svelte';
   import SignUp from './pages/SignUp.svelte';
@@ -27,12 +28,13 @@
 <main role="main" class:vertical={$activeRoute.path === '/'}>
   <Router>
     <Route path="/" component={Home} />
-    <Route path="/signup" component={SignUp} />
+    <Route path="/signup" component={SignUp} {redirect} />
     <Route path="/login" component={LogIn} />
     <Route path="/chat" component={Chat} middleware={[guard]} />
     <Route component={NotFound} />
   </Router>
 </main>
+<Toasts />
 
 <style lang="scss">
   @import './styles/variables';

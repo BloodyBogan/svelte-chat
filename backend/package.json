@@ -23,7 +23,6 @@
     "mongoose-type-url": "^2.1.0",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "seedable-random-avatar-generator": "^1.1.2",
     "volleyball": "^1.5.1"
   },
   "devDependencies": {

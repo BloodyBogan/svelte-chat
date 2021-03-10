@@ -3,7 +3,11 @@
 
   import axios from '@axios';
 
+  import { notificationsStore } from '../stores/notifications';
+
   import type { SignUpFields } from './types';
+
+  export let redirect: (path: string) => void;
 
   let usernameInputField: HTMLInputElement;
   let passwordInputField: HTMLInputElement;
@@ -35,13 +39,21 @@
     try {
       const response = await axios.post('/auth/signup', body);
 
+      if (response.data.success) {
+        redirect('/login');
+
+        notificationsStore.addNotification('Hooray!', response.data.message);
+      } else {
+        notificationsStore.addNotification('Oops!', 'Looks like something went wrong');
+      }
+
       usernameValue = '';
       passwordValue = '';
       confirmPasswordValue = '';
     } catch (err) {
-      const response = err.response.data;
-      if ('errors' in response) {
-        const { errors: errs } = response;
+      const response = err.response;
+      if ('errors' in response.data) {
+        const { errors: errs } = response.data;
 
         errs.forEach((error, index): void => {
           const key = Object.keys(error)[0];
@@ -50,6 +62,12 @@
 
           if (index === 0) fields[key].focus();
         });
+      } else if (response.status === 409) {
+        notificationsStore.addNotification('So sad!', response.data.message);
+
+        usernameInputField.focus();
+      } else {
+        notificationsStore.addNotification('Oops!', response.data.message);
       }
     }
   };

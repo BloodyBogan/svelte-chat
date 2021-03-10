@@ -1,6 +1,5 @@
 const { Schema, SchemaTypes, model } = require('mongoose');
 const bcrypt = require('bcrypt');
-const getRandomAvatar = require('seedable-random-avatar-generator');
 require('mongoose-type-url');
 
 const UserSchema = new Schema({
@@ -24,7 +23,7 @@ UserSchema.pre('save', async function (next) {
   try {
     if (this.isNew) {
       this.password = await bcrypt.hash(this.password, 13);
-      this.profilePhoto = getRandomAvatar(this.username);
+      this.profilePhoto = `https://api.multiavatar.com/${this.username}.png`;
     }
 
     next();

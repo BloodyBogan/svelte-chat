@@ -48,6 +48,24 @@ app.use(passport.session());
 
 app.use('/api/v1', require('./routes/api'));
 
+const notFound = (req, res, next) => {
+  res.status(404);
+
+  const error = new Error(`Not Found - ${req.originalUrl}`);
+  next(error);
+};
+
+const errorHandler = (err, req, res) => {
+  res.status(res.statusCode || 500);
+  res.json({
+    message: err.message,
+    stack: production ? 'There was an error' : err.stack,
+  });
+};
+
+app.use(notFound);
+app.use(errorHandler);
+
 const PORT = process.env.PORT || 3000;
 
 const startServer = async () => {

@@ -17,8 +17,13 @@ const signUpValidationRules = () => [
     .escape()
     .isLength({ min: 8 })
     .withMessage('Password must be at least 8 characters long')
-    .contains(/[0-9]/)
-    .withMessage('Password must contain at least one number'),
+    .custom((password) => {
+      if (password.search(/[0-9]/) === -1) {
+        throw new Error('Password must contain at least one number');
+      }
+
+      return true;
+    }),
   body('confirmPassword').custom((confirmPassword, { req }) => {
     const { password } = req.body;
 
