@@ -17,7 +17,7 @@ module.exports = (passport) => {
             });
           }
 
-          const isPasswordValid = await User.isPasswordValid(password);
+          const isPasswordValid = await user.isPasswordValid(password);
           if (!isPasswordValid) {
             return done(null, false, { message: 'Invalid credentials' });
           }

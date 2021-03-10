@@ -27,7 +27,7 @@ assert(MONGO_STORE_SECRET, 'MONGO_STORE_SECRET is required!');
 
 config.corsOptions = {
   origin: config.origin,
-  methods: 'GET,POST',
+  methods: 'GET,POST,DELETE',
   credentials: true,
   optionsSuccessStatus: 200,
 };

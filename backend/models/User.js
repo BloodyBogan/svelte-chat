@@ -32,8 +32,8 @@ UserSchema.pre('save', async function (next) {
   }
 });
 
-UserSchema.methods.isPasswordValid = async function (password) {
+UserSchema.method('isPasswordValid', async function (password) {
   return bcrypt.compare(password, this.password);
-};
+});
 
 module.exports = model('User', UserSchema);

@@ -5,7 +5,7 @@
 
   import { notificationsStore } from '../stores/notifications';
 
-  import type { SignUpFields } from './types';
+  import type { AuthFields } from './types';
 
   export let redirect: (path: string) => void;
 
@@ -23,7 +23,7 @@
     confirmPassword: ''
   };
 
-  let fields: SignUpFields = {
+  let fields: AuthFields = {
     username: null,
     password: null,
     confirmPassword: null

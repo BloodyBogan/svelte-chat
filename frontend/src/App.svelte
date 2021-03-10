@@ -1,11 +1,19 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+
+  import axios from '@axios';
+
   import { Router, Route, redirect } from './router';
 
   import { activeRouteStore } from './router/types';
   const { activeRoute } = activeRouteStore;
 
+  import { userStore } from './stores/user';
+  const { isAuthenticated, user } = userStore;
+
   import Header from './components/Header.svelte';
   import Toasts from './components/Toasts.svelte';
+  import Loader from './components/Loader.svelte';
 
   import Home from './pages/Home.svelte';
   import SignUp from './pages/SignUp.svelte';
@@ -13,26 +21,54 @@
   import Chat from './pages/Chat.svelte';
   import NotFound from './pages/NotFound.svelte';
 
-  let isAuth = true;
+  let loading = true;
 
-  const guard: PageJS.Callback = (ctx, next) => {
-    if (isAuth) {
-      redirect('/login');
-    } else {
+  const ensureAuthenticated: PageJS.Callback = (ctx, next) => {
+    if ($isAuthenticated) {
       next();
+    } else {
+      redirect('/login');
     }
   };
+
+  const ensureGuest: PageJS.Callback = (ctx, next) => {
+    if (!$isAuthenticated) {
+      next();
+    } else {
+      redirect('/chat');
+    }
+  };
+
+  onMount(async () => {
+    try {
+      const response = await axios.get('/user');
+
+      if (response.data.success) {
+        $isAuthenticated = true;
+        $user = response.data.user;
+      }
+    } catch (err) {
+      $isAuthenticated = false;
+      $user = {};
+    }
+
+    loading = false;
+  });
 </script>
 
-<Header />
+<Header {loading} {redirect} />
 <main role="main" class:vertical={$activeRoute.path === '/'}>
-  <Router>
-    <Route path="/" component={Home} />
-    <Route path="/signup" component={SignUp} {redirect} />
-    <Route path="/login" component={LogIn} />
-    <Route path="/chat" component={Chat} middleware={[guard]} />
-    <Route component={NotFound} />
-  </Router>
+  {#if loading}
+    <Loader />
+  {:else}
+    <Router>
+      <Route path="/" component={Home} middleware={[ensureGuest]} />
+      <Route path="/signup" component={SignUp} middleware={[ensureGuest]} {redirect} />
+      <Route path="/login" component={LogIn} middleware={[ensureGuest]} {redirect} />
+      <Route path="/chat" component={Chat} middleware={[ensureAuthenticated]} />
+      <Route component={NotFound} />
+    </Router>
+  {/if}
 </main>
 <Toasts />
 
@@ -40,6 +76,7 @@
   @import './styles/variables';
 
   main {
+    position: relative;
     display: inline-flex;
     flex-direction: row;
     align-items: center;

@@ -35,6 +35,21 @@ const signUpValidationRules = () => [
   }),
 ];
 
+const logInValidationRules = () => [
+  body('username')
+    .not()
+    .isEmpty()
+    .withMessage('Username must not be empty')
+    .trim()
+    .escape(),
+  body('password')
+    .not()
+    .isEmpty()
+    .withMessage('Password must not be empty')
+    .trim()
+    .escape(),
+];
+
 const validate = (req, res, next) => {
   const errors = validationResult(req);
   if (errors.isEmpty()) {
@@ -52,5 +67,6 @@ const validate = (req, res, next) => {
 
 module.exports = {
   signUpValidationRules,
+  logInValidationRules,
   validate,
 };
