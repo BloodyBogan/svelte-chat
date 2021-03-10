@@ -37,7 +37,7 @@
         margin-bottom: 1rem;
     }
 
-    input[type="text"], input[type="password"] {
+    input[type="text"], input[type="password"], textarea {
         width: 100%;
         padding: 1.25em;
         color: $clr-dark-900;
@@ -47,6 +47,10 @@
         &:invalid {
             box-shadow: none;
         }
+    }
+
+    textarea {
+        resize: vertical;
     }
     
     .error {

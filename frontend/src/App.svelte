@@ -65,7 +65,12 @@
       <Route path="/" component={Home} middleware={[ensureGuest]} />
       <Route path="/signup" component={SignUp} middleware={[ensureGuest]} {redirect} />
       <Route path="/login" component={LogIn} middleware={[ensureGuest]} {redirect} />
-      <Route path="/chat" component={Chat} middleware={[ensureAuthenticated]} />
+      <Route
+        path="/chat"
+        component={Chat}
+        middleware={[ensureAuthenticated]}
+        {redirect}
+      />
       <Route component={NotFound} />
     </Router>
   {/if}

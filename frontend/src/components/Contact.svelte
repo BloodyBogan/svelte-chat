@@ -28,8 +28,12 @@
     cursor: pointer;
 
     &__profile-photo {
+      $size: 6.6rem;
+
       position: relative;
-      max-width: 6.6rem;
+      width: $size;
+      height: $size;
+      border-radius: 50%;
 
       &::after {
         $size: 1.5rem;

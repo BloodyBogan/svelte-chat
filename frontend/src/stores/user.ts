@@ -1,7 +1,9 @@
 import { writable, Writable } from 'svelte/store';
 
 interface User {
-    username?: string
+    username?: string,
+    profilePhoto?: string,
+    bio?: string
 }
 
 class UserStore {

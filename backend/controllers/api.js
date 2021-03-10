@@ -60,16 +60,22 @@ exports.handleLogIn = (req, res) => {
         });
       }
 
+      const { username, profilePhoto, bio } = user;
+
       return res.status(201).json({
         success: true,
         message: 'Welcome back',
-        user: user.username,
+        user: {
+          username,
+          profilePhoto,
+          bio,
+        },
       });
     });
   })(req, res);
 };
 
-// @desc  Logs out the user
+// @desc  Log out the user
 // @route DELETE /api/v1/auth/logout
 // @access Private
 exports.handleLogOut = (req, res) => {
@@ -81,12 +87,40 @@ exports.handleLogOut = (req, res) => {
   });
 };
 
-// @desc  Retrieves user's info
+// @desc  Retrieve user's info
 // @route POST /api/v1/user
 // @access Private
-exports.handleUserInfo = (req, res) =>
-  // eslint-disable-next-line implicit-arrow-linebreak
-  res.status(200).json({
+exports.handleUserInfo = (req, res) => {
+  const { username, profilePhoto, bio } = req.user;
+
+  return res.status(200).json({
     success: true,
-    user: req.user.username,
+    user: {
+      username,
+      profilePhoto,
+      bio,
+    },
   });
+};
+
+// @desc  Edit user's bio
+// @route PATCH /api/v1/user/bio
+// @access Private
+exports.handleUserBioEdit = async (req, res) => {
+  const { id } = req.user;
+  const { bio } = req.body;
+
+  try {
+    await User.findByIdAndUpdate({ _id: id }, { bio });
+
+    return res.status(200).json({
+      success: true,
+      message: 'Bio successfully edited',
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: 'There was an error editing your bio',
+    });
+  }
+};

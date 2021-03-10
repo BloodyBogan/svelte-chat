@@ -1,6 +1,12 @@
 <script lang="ts">
+  import { profileStore } from '../stores/profile';
+  const { profileOpened } = profileStore;
+
   import SearchOrAdd from 'src/components/SearchOrAdd.svelte';
   import ContactList from 'src/components/ContactList.svelte';
+  import Profile from 'src/components/Profile.svelte';
+
+  export let redirect: (path: string) => void;
 </script>
 
 <section class="contacts">
@@ -13,15 +19,19 @@
     <ContactList />
   </div>
 </section>
-<section class="chat">Your chat</section>
+{#if $profileOpened}
+  <Profile {redirect} />
+{:else}
+  <section class="chat">Your chat</section>
+{/if}
 
 <style lang="scss">
   @import '../styles/variables';
 
   .contacts {
     align-self: stretch;
-    max-width: 46.5rem;
-    width: 100%;
+    flex-shrink: 0;
+    width: 46.5rem;
     margin-right: 9.5rem;
     text-align: left;
     background: $clr-light-100;

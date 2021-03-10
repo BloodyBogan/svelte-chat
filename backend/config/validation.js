@@ -50,6 +50,17 @@ const logInValidationRules = () => [
     .escape(),
 ];
 
+const editBioValidationRules = () => [
+  body('bio')
+    .not()
+    .isEmpty()
+    .withMessage('Bio must not be empty')
+    .trim()
+    .escape()
+    .isLength({ max: 70 })
+    .withMessage('Bio must not be more than 70 characters long'),
+];
+
 const validate = (req, res, next) => {
   const errors = validationResult(req);
   if (errors.isEmpty()) {
@@ -68,5 +79,6 @@ const validate = (req, res, next) => {
 module.exports = {
   signUpValidationRules,
   logInValidationRules,
+  editBioValidationRules,
   validate,
 };

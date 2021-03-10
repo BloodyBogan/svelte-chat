@@ -7,6 +7,9 @@
   import { userStore } from '../stores/user';
   const { isAuthenticated, user } = userStore;
 
+  import { profileStore } from '../stores/profile';
+  const { profileOpened } = profileStore;
+
   import { notificationsStore } from '../stores/notifications';
 
   export let loading: boolean;
@@ -53,8 +56,12 @@
             <button on:click={handleLogOut}>Log out</button>
           </li>
           <li>
-            <button
-              >{$user}<svg width="16" height="19" xmlns="http://www.w3.org/2000/svg">
+            <button on:click={() => ($profileOpened = !$profileOpened)}
+              >{$user.username}<svg
+                width="16"
+                height="19"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path
                   d="M3 5a5 5 0 1110 0A5 5 0 013 5zm5 3a3 3 0 100-6 3 3 0 000 6zM2.343 13.343A8 8 0 000 19h2a6 6 0 1112 0h2a8 8 0 00-13.657-5.657z"
                 />

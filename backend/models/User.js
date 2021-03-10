@@ -17,6 +17,11 @@ const UserSchema = new Schema({
   profilePhoto: {
     type: SchemaTypes.Url,
   },
+  bio: {
+    type: String,
+    trim: true,
+    default: '',
+  },
 });
 
 UserSchema.pre('save', async function (next) {
