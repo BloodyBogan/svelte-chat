@@ -86,7 +86,12 @@
     }
 
     &__bar {
-      background-color: lighten($clr-accent-darkest, 10%);
+      background: lighten($clr-accent-darkest, 10%);
+      background: linear-gradient(
+        to right,
+        lighten($clr-accent-darkest, 10%),
+        lighten($clr-accent-light, 10%)
+      );
     }
 
     &__bar > .line {

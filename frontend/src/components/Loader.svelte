@@ -73,7 +73,7 @@
 
   @keyframes loader {
     100% {
-      transform: rotate(360deg);
+      transform: translate(-50%, -50%) rotate(360deg);
     }
   }
 
