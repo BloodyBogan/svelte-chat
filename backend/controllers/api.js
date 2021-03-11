@@ -1,6 +1,8 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable operator-linebreak */
 /* eslint-disable no-underscore-dangle */
+const path = require('path');
+const fs = require('fs');
 const passport = require('passport');
 const multer = require('multer');
 
@@ -212,7 +214,19 @@ exports.handleUserPhotoChange = (req, res) => {
     const url = `${host}/uploads/${req.file.filename}`;
 
     try {
-      await User.findByIdAndUpdate({ _id: id }, { profilePhoto: url });
+      const user = await User.findById({ _id: id });
+
+      const filenameArray = user.profilePhoto.split('/');
+      const filename = filenameArray[filenameArray.length - 1];
+
+      fs.unlink(
+        path.join(__dirname, '..', 'public', 'uploads', `${filename}`),
+        () => {}
+      );
+
+      user.profilePhoto = url;
+
+      await user.save();
 
       return res.status(201).json({
         success: true,
