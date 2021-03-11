@@ -93,7 +93,6 @@
             on:click={() => handleDecline(friendRequest._id)}
             ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
               ><path
-                fill="none"
                 d="M17 20V8H7v12h10zm-4-10h2v8h-2v-8zm-4 0h2v8H9v-8zm0-6h6v2H9z"
               /><path
                 d="M5 20l2 2h10l2-2V8h2V6h-4V4l-2-2H9L7 4v2H3v2h2v12zM9 4h6v2H9V4zM8 8h9v12H7V8h1z"

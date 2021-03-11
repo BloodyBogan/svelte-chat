@@ -72,7 +72,14 @@ exports.handleLogIn = (req, res) => {
       }
 
       // eslint-disable-next-line object-curly-newline
-      const { username, profilePhoto, bio, friends, friendRequests } = user;
+      const {
+        _id,
+        username,
+        profilePhoto,
+        bio,
+        friends,
+        friendRequests,
+      } = user;
 
       let usersFriends = friends;
 
@@ -85,9 +92,15 @@ exports.handleLogIn = (req, res) => {
               username: 1,
               profilePhoto: 1,
               bio: 1,
+              online: 1,
             }
           );
         }
+
+        const currentUser = await User.findById({ _id });
+        currentUser.online = true;
+
+        await currentUser.save();
 
         return res.status(201).json({
           success: true,
@@ -113,13 +126,27 @@ exports.handleLogIn = (req, res) => {
 // @desc  Log out the user
 // @route DELETE /api/v1/auth/logout
 // @access Private
-exports.handleLogOut = (req, res) => {
+exports.handleLogOut = async (req, res) => {
+  const { id } = req.user;
+
   req.logout();
 
-  return res.status(200).json({
-    success: true,
-    message: 'Successfully logged out',
-  });
+  try {
+    const user = await User.findById({ _id: id });
+    user.online = false;
+
+    await user.save();
+
+    return res.status(200).json({
+      success: true,
+      message: 'Successfully logged out',
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: 'There was an error',
+    });
+  }
 };
 
 // @desc  Retrieve user's info
@@ -140,6 +167,7 @@ exports.handleUserInfo = async (req, res) => {
           username: 1,
           profilePhoto: 1,
           bio: 1,
+          online: 1,
         }
       );
     }

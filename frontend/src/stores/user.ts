@@ -11,6 +11,7 @@ export interface User {
     bio?: string, 
     friends?: User[],
     friendRequests?: FriendRequests[],
+    online?: boolean
 }
 
 class UserStore {

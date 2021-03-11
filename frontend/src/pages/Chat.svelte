@@ -11,6 +11,7 @@
   import Profile from 'src/components/Profile.svelte';
   import SearchResults from 'src/components/SearchResults.svelte';
   import FriendRequests from 'src/components/FriendRequests.svelte';
+  import ChatBox from 'src/components/ChatBox.svelte';
 
   export let redirect: (path: string) => void;
 
@@ -46,13 +47,19 @@
 
     friendRequestsOpen = !friendRequestsOpen;
   };
+
+  let friendsOnline = 0;
+
+  $: if ($user.friends) {
+    friendsOnline = $user.friends.filter(friend => friend.online).length;
+  }
 </script>
 
 <section class="contacts">
   <header class="contacts__header">
     <div class="left">
       <strong>Chat</strong>
-      <p>1 online</p>
+      <p>{friendsOnline} online</p>
     </div>
     <div class="right">
       <button on:click={handleFriendRequestsOpenClose}
@@ -85,7 +92,7 @@
 {#if $profileOpened}
   <Profile {redirect} />
 {:else}
-  <section class="chat">Your chat</section>
+  <ChatBox />
 {/if}
 
 <style lang="scss">

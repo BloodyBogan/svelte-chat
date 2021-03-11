@@ -110,8 +110,7 @@
       }
 
       strong {
-        font-size: 2rem;
-        font-weight: 600;
+        font-weight: 700;
         color: $clr-accent-darkest;
       }
     }

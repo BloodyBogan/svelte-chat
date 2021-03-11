@@ -22,6 +22,10 @@ const UserSchema = new Schema({
     trim: true,
     default: '',
   },
+  online: {
+    type: Boolean,
+    default: false,
+  },
   friends: [
     {
       type: Schema.Types.ObjectId,

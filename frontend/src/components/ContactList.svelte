@@ -3,16 +3,16 @@
 
   import Contact from './Contact.svelte';
 
-  export let friends: User[] | undefined;
+  export let friends: User[] = [];
 </script>
 
 <ul class="contact-list">
-  {#if friends}
+  {#if !friends || friends.length === 0}
+    <p>No friends yet...</p>
+  {:else}
     {#each friends as friend}
       <Contact username={friend.username} profilePhoto={friend.profilePhoto} />
     {/each}
-  {:else}
-    <p>No friends yet...</p>
   {/if}
 </ul>
 
