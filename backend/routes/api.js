@@ -6,6 +6,7 @@ const {
   handleLogOut,
   handleUserInfo,
   handleUserBioEdit,
+  handleUserPhotoChange,
 } = require('../controllers/api');
 const {
   signUpValidationRules,
@@ -29,5 +30,6 @@ router
     validate,
     handleUserBioEdit
   );
+router.route('/user/photo').post(ensureAuthenticated, handleUserPhotoChange);
 
 module.exports = router;

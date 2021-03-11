@@ -52,6 +52,64 @@
     textarea {
         resize: vertical;
     }
+
+    input[type="file"] {
+        display: none;
+        width: 0;
+        height: 0;
+        opacity: 0;
+        visibility: hidden;
+
+        & + label {
+            width: 100%;
+            padding: 1.25em;
+            color: $clr-dark-900;
+            border: 0.1rem solid $clr-light-200;
+            border-radius: $border-radius-small;
+            cursor: pointer;
+
+            span {
+                color: $clr-accent-darkest;
+            }
+        }
+    }
+
+    progress {
+        width: 100%;
+        height: 1rem;
+        color: lighten($clr-accent-darkest, 10%);
+        background-color: $clr-light-200;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border: 0.1rem solid $clr-light-200;
+        border-radius: $border-radius-small;
+
+        &::-webkit-progress-bar {
+            background-color: $clr-light-200;
+            border-radius: $border-radius-small;
+        }
+
+        &::-moz-progress-bar {
+            background: lighten($clr-accent-darkest, 10%);
+            background: linear-gradient(
+                to right,
+                lighten($clr-accent-darkest, 10%),
+                lighten($clr-accent-light, 10%)
+            );
+            border-radius: $border-radius-small;
+        }
+
+        &::-webkit-progress-value {
+            background: lighten($clr-accent-darkest, 10%);
+            background: linear-gradient(
+                to right,
+                lighten($clr-accent-darkest, 10%),
+                lighten($clr-accent-light, 10%)
+            );
+            border-radius: $border-radius-small;
+        }
+    }
     
     .error {
         margin-top: 0.8rem;

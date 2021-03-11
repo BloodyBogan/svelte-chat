@@ -1,4 +1,9 @@
 const passport = require('passport');
+const multer = require('multer');
+
+const upload = require('../config/multer');
+
+const { host } = require('../config');
 
 const User = require('../models/User');
 
@@ -123,4 +128,50 @@ exports.handleUserBioEdit = async (req, res) => {
       message: 'There was an error editing your bio',
     });
   }
+};
+
+// @desc  Change user's profile photo
+// @route POST /api/v1/user/photo
+// @access Private
+exports.handleUserPhotoChange = (req, res) => {
+  upload(req, res, async (error) => {
+    if (error instanceof multer.MulterError) {
+      return res.status(422).json({
+        success: false,
+        message: 'Photo must not be larger than 1MB',
+      });
+    }
+
+    if (error) {
+      return res.status(422).json({
+        success: false,
+        message: 'You can only upload an image',
+      });
+    }
+
+    if (!req.file) {
+      return res.status(422).json({
+        success: false,
+        message: 'Please choose an image',
+      });
+    }
+
+    const { id } = req.user;
+    const url = `${host}/uploads/${req.file.filename}`;
+
+    try {
+      await User.findByIdAndUpdate({ _id: id }, { profilePhoto: url });
+
+      return res.status(201).json({
+        success: true,
+        url,
+        message: 'Photo successfully changed',
+      });
+    } catch (err) {
+      return res.status(500).json({
+        success: false,
+        message: 'There was an error',
+      });
+    }
+  });
 };

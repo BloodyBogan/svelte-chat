@@ -1,6 +1,8 @@
 const assert = require('assert');
 
 const {
+  PRODUCTION_HOST,
+  DEVELOPMENT_HOST,
   PRODUCTION_ORIGIN,
   DEVELOPMENT_ORIGIN,
   SESSION_SECRET,
@@ -14,11 +16,16 @@ const config = {};
 config.production = production;
 
 if (production) {
+  assert(PRODUCTION_HOST, 'PRODUCTION_HOST is required!');
   assert(PRODUCTION_ORIGIN, 'PRODUCTION_ORIGIN is required!');
 
+  config.host = PRODUCTION_HOST;
   config.origin = PRODUCTION_ORIGIN;
 } else {
+  assert(DEVELOPMENT_HOST, 'DEVELOPMENT_HOST is required!');
   assert(DEVELOPMENT_ORIGIN, 'DEVELOPMENT_ORIGIN is required!');
+
+  config.host = DEVELOPMENT_HOST;
   config.origin = DEVELOPMENT_ORIGIN;
 }
 

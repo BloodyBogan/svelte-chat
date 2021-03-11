@@ -32,6 +32,8 @@ app.use(volleyball);
 
 app.use(express.json());
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 if (production) {
   app.set('trust proxy', 1);
 }
