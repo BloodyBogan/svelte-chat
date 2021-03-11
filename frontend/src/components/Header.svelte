@@ -16,24 +16,26 @@
   export let redirect: (path: string) => void;
 
   const handleLogOut = async (): Promise<void> => {
+    $isAuthenticated = false;
+    $user = {};
+
+    redirect('/');
+
+    $profileOpened = false;
+
     try {
       const response = await axios.delete('/auth/logout');
 
       if (response.data.success) {
-        redirect('/');
-
         notificationsStore.addNotification(
           "Don't forget to come back",
           response.data.message
         );
+      } else {
+        notificationsStore.addNotification('Oops', 'Something went wrong');
       }
     } catch (err) {
-      redirect('/');
-
       notificationsStore.addNotification('Oops', 'There was an error');
-    } finally {
-      $isAuthenticated = false;
-      $user = {};
     }
   };
 </script>

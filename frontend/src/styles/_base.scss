@@ -54,7 +54,10 @@ button {
   background: none;
   appearance: none;
   border: none;
-  outline: none;
+  
+  &:focus {
+    outline: none;
+  }
 }
 
 input[type="submit"],

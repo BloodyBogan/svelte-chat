@@ -11,6 +11,8 @@
   import { userStore } from './stores/user';
   const { isAuthenticated, user } = userStore;
 
+  import { notificationsStore } from './stores/notifications';
+
   import Header from './components/Header.svelte';
   import Toasts from './components/Toasts.svelte';
   import Loader from './components/Loader.svelte';
@@ -46,6 +48,8 @@
       if (response.data.success) {
         $isAuthenticated = true;
         $user = response.data.user;
+      } else {
+        notificationsStore.addNotification('Oops!', 'Something went wrong');
       }
     } catch (err) {
       $isAuthenticated = false;

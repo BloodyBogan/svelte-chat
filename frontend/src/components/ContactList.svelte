@@ -1,40 +1,19 @@
 <script lang="ts">
+  import type { User } from '../stores/user';
+
   import Contact from './Contact.svelte';
 
-  const contact1 = {
-    profilePhoto: 'https://api.multiavatar.com/Test5.png',
-    online: true,
-    username: 'BloodyBogan',
-    lastMessage: 'That was so cool, though!'
-  };
-
-  const contact2 = {
-    profilePhoto: 'https://api.multiavatar.com/Test6.png',
-    online: false,
-    username: 'BloodyBogan2',
-    lastMessage: 'That was so awesome, though!'
-  };
-
-  const contact3 = {
-    profilePhoto: 'https://api.multiavatar.com/Test8.png',
-    online: false,
-    username: 'BloodyBogan3',
-    lastMessage: 'That was so adorable, though!'
-  };
-
-  const contact4 = {
-    profilePhoto: 'https://api.multiavatar.com/Test11.png',
-    online: false,
-    username: 'BloodyBogan4',
-    lastMessage: 'That was so scary, though!'
-  };
+  export let friends: User[] | undefined;
 </script>
 
 <ul class="contact-list">
-  <Contact {...contact1} />
-  <Contact {...contact2} />
-  <Contact {...contact3} />
-  <Contact {...contact4} />
+  {#if friends}
+    {#each friends as friend}
+      <Contact username={friend.username} profilePhoto={friend.profilePhoto} />
+    {/each}
+  {:else}
+    <p>No friends yet...</p>
+  {/if}
 </ul>
 
 <style lang="scss">

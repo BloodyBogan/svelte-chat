@@ -22,6 +22,24 @@ const UserSchema = new Schema({
     trim: true,
     default: '',
   },
+  friends: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
+  ],
+  friendRequests: [
+    {
+      id: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+      },
+      username: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
 });
 
 UserSchema.pre('save', async function (next) {

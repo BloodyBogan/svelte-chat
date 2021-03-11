@@ -61,6 +61,15 @@ const editBioValidationRules = () => [
     .withMessage('Bio must not be more than 70 characters long'),
 ];
 
+const addFriendValidationRules = () => [
+  body('searchValue')
+    .not()
+    .isEmpty()
+    .withMessage('Username must not be empty')
+    .trim()
+    .escape(),
+];
+
 const validate = (req, res, next) => {
   const errors = validationResult(req);
   if (errors.isEmpty()) {
@@ -80,5 +89,6 @@ module.exports = {
   signUpValidationRules,
   logInValidationRules,
   editBioValidationRules,
+  addFriendValidationRules,
   validate,
 };

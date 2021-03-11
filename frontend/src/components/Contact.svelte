@@ -1,8 +1,8 @@
 <script lang="ts">
-  export let profilePhoto: string;
-  export let online: boolean;
-  export let username: string;
-  export let lastMessage: string;
+  export let profilePhoto: string | undefined;
+  export let online = false;
+  export let username: string | undefined;
+  export let lastMessage = 'No messages yet';
 </script>
 
 <li class="contact">
@@ -33,7 +33,12 @@
       position: relative;
       width: $size;
       height: $size;
-      border-radius: 50%;
+
+      img {
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+      }
 
       &::after {
         $size: 1.5rem;

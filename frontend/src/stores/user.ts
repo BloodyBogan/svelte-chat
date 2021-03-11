@@ -1,9 +1,16 @@
 import { writable, Writable } from 'svelte/store';
 
-interface User {
+export interface FriendRequests {
+    _id: number,
+    username: string,
+}
+
+export interface User {
     username?: string,
     profilePhoto?: string,
-    bio?: string
+    bio?: string, 
+    friends?: User[],
+    friendRequests?: FriendRequests[],
 }
 
 class UserStore {

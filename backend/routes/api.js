@@ -7,11 +7,15 @@ const {
   handleUserInfo,
   handleUserBioEdit,
   handleUserPhotoChange,
+  handleAddFriend,
+  handleAcceptFriendRequest,
+  handleDeclineFriendRequest,
 } = require('../controllers/api');
 const {
   signUpValidationRules,
   logInValidationRules,
   editBioValidationRules,
+  addFriendValidationRules,
   validate,
 } = require('../config/validation');
 const { ensureAuthenticated } = require('../middleware/auth');
@@ -31,5 +35,19 @@ router
     handleUserBioEdit
   );
 router.route('/user/photo').post(ensureAuthenticated, handleUserPhotoChange);
+router
+  .route('/user/friends')
+  .post(
+    addFriendValidationRules(),
+    validate,
+    ensureAuthenticated,
+    handleAddFriend
+  );
+router
+  .route('/user/friends/accept')
+  .post(ensureAuthenticated, handleAcceptFriendRequest);
+router
+  .route('/user/friends/decline')
+  .post(ensureAuthenticated, handleDeclineFriendRequest);
 
 module.exports = router;

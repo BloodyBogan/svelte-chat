@@ -39,6 +39,7 @@
 
       if (response.data.success) {
         $isAuthenticated = true;
+
         $user = response.data.user;
 
         redirect('/chat');
